@@ -18,7 +18,7 @@ def rool_dice(msg, bot):
     :type msg: smart_qq_bot.messages.GroupMsg
     """
     msg_id = randint(1, 10000)
-    rdre = re.compile("^!roll.?\{(.*?)\}\{(.*?)\}")
+    rdre = re.compile("^!roll.?\{(.*?)\}\{(.*?)\}\{(.*?)\}")
     rdfind = rdre.findall(msg.content)
     if len(rdfind) > 0:
         rd = rdfind[0]
@@ -29,7 +29,7 @@ def rool_dice(msg, bot):
             for i in range(times_roll):
                 result_list[i] = randint(1, dicetype_roll)
             result_sum = sum(result_list)
-            output = str({result_sum:result_list})
+            output = rd[2] + ':' + str({result_sum:result_list})
             if isinstance(msg, GroupMsg):
                 bot.send_group_msg(output, msg.from_uin, msg_id)
             elif isinstance(msg, PrivateMsg):
